@@ -25,6 +25,10 @@ jobs:
         working-directory: dba-challenge
         run: docker compose up -d
 
+      - name: Make Rails scripts executable
+        working-directory: ruby-on-rails
+        run: chmod +x bin/*
+
       - name: Start Ruby on Rails services
         working-directory: ruby-on-rails
         run: docker compose up -d

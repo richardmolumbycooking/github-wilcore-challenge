@@ -29,6 +29,14 @@ jobs:
         working-directory: ruby-on-rails
         run: docker compose up -d
 
+      - name: Prepare Rails test database
+        working-directory: ruby-on-rails
+        run: docker compose run --rm web bin/rails db:prepare
+
+      - name: Run Rails RSpec tests
+        working-directory: ruby-on-rails
+        run: docker compose run --rm web bundle exec rspec
+
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
@@ -36,6 +44,9 @@ jobs:
           java-version: '17'
           cache: maven
           cache-dependency-path: java/spring-boot-challenge/pom.xml
+
+      - name: Run Maven tests
+        run: mvn --batch-mode test
 
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots clean package

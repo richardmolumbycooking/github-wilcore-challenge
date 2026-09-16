@@ -9,6 +9,10 @@ on:
 permissions:
   contents: read
 
+defaults:
+  run:
+    working-directory: java/spring-boot-challenge
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,9 +27,7 @@ jobs:
           distribution: temurin
           java-version: '17'
           cache: maven
+          cache-dependency-path: java/spring-boot-challenge/pom.xml
 
-      - name: Make Maven Wrapper Executable
-        run: chmod +x ./mvnw
-     
-      - name: Build with Maven Wrapper
-        run: ./mvnw --batch-mode --update-snapshots clean package
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots clean package

@@ -24,5 +24,8 @@ jobs:
           java-version: '17'
           cache: maven
 
-      - name: Build with Maven
-        run: ./mvnw --batch-mode --update-snapshots verify
+      - name: Make Maven Wrapper Executable
+        run: chmod +x ./mvnw
+     
+      - name: Build with Maven Wrapper
+        run: ./mvnw --batch-mode --update-snapshots clean package

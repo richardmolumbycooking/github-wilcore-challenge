@@ -29,10 +29,6 @@ jobs:
         working-directory: ruby-on-rails
         run: chmod +x bin/*
 
-      - name: Start Ruby on Rails services
-        working-directory: ruby-on-rails
-        run: docker compose up -d
-
       - name: Prepare Rails test database
         working-directory: ruby-on-rails
         run: docker compose run --rm web bin/rails db:prepare
